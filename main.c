@@ -35,13 +35,13 @@ int main(int argc, char *argv[])
     error=0;
 
     if(argc < 2){
-        printf("Usage: %s <program> [-i]\n",argv[0]);
+        printf("Usage: %s [-i] <program>\n",argv[0]);
         error++;
         goto abort;
     }
 
     snprintf(logfile,128,"%s.log.txt",argv[0]);
-    programname=argv[1];
+    programname=argv[argc-1];
 
     log = fopen(logfile,"a+");
     if(!log){
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
     impersonate=FALSE;
     if(argc > 2){
-        if(!strncmp(argv[2],"-i",2)){
+        if(!strncmp(argv[1],"-i",2)){
             impersonate=TRUE;
         }
     }
