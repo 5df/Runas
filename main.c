@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     error=0;
 
     if(argc < 2){
-        printf("Usage: %s [-i] <program>\n",argv[0]);
+        printf("Usage: %s [-i] <program>\n\t-i: impersonate the active session user\n\t",argv[0]);
         error++;
         goto abort;
     }
@@ -52,9 +52,14 @@ int main(int argc, char *argv[])
     fprintf(log,"-- %s start --\n",argv[0]);
 
     impersonate=FALSE;
-    if(argc > 2){
-        if(!strncmp(argv[1],"-i",2)){
+    for(i=1;i<argc-1;i++){
+        if(!strncmp(argv[i],"-i",2)){
             impersonate=TRUE;
+        }
+        else {
+            fprintf(log,"[!] Unknow option: %s\n",argv[i]);
+            error++;
+            goto abort;
         }
     }
     if(impersonate)
