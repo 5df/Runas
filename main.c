@@ -110,6 +110,8 @@ int main(int argc, char *argv[])
 
     if( ! getActiveConsoleId(&sessionid)){
         fprintf(log,"[-] WTSEnumerateSessions: %ld, error\n",GetLastError());
+        error++;
+        goto abort;
     }
     else {
         fprintf(log,"[+] WTSEnumerateSessions: ok\n");
